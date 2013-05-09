@@ -106,8 +106,15 @@
 
 #pragma mark - GLKViewDelegate
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+    
+    // update
+    for (Entity2 *e in m_ballArray) {
+        [e update:1.0/60.0];
+    }
+    [m_movingBall update:1.0/60.0];
+    
     // clear color
-    glClearColor(0.0, 1.0, 1.0, 1.0);
+    glClearColor(0.0, 0.5, 0.5, 1.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     // blend
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -128,9 +135,9 @@
     UITouch *touch = [touches anyObject];
     CGPoint endPoint = [touch locationInView:self.view];
     NSLog(@"endPoint x = %f, y = %f", endPoint.x, endPoint.y);
-    float x = endPoint.x;
-    float y = [UIScreen mainScreen].bounds.size.height - endPoint.y;
-    m_movingBall.pos = GLKVector2Make(x, y);
+    //float x = endPoint.x;
+    //float y = [UIScreen mainScreen].bounds.size.height - endPoint.y;
+    //m_movingBall.pos = GLKVector2Make(x, y);
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -139,9 +146,10 @@
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self.view];
     NSLog(@"touchesBegan: x = %f, y = %f", p.x, p.y);
-    float x = p.x;
-    float y = [UIScreen mainScreen].bounds.size.height - p.y;
-    m_movingBall.pos = GLKVector2Make(x, y);
+    //float x = p.x;
+    //float y = [UIScreen mainScreen].bounds.size.height - p.y;
+    //m_movingBall.pos = GLKVector2Make(x, y);
+    [m_movingBall moveUp:400 andDuration:0.5];
 }
 
 @end

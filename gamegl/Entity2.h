@@ -16,7 +16,13 @@
 @property(nonatomic, assign) GLKVector2 scale;
 
 - (id)initWithTexture:(NSString *)fileName effect:(GLKBaseEffect *)effect;
-- (GLKMatrix4) calculateModelMatrix;
-- (void) update:(float)dt;
+- (GLKMatrix4)calculateModelMatrix;
+- (void)update:(float)dt;
+
+// animation
+- (void)moveLeft:(float)distance andDuration:(float)dt;
+- (void)moveRight:(float)distance andDuration:(float)dt;
+- (void)moveUp:(float)distance andDuration:(float)dt;
+- (void)moveDown:(float)distance andDuration:(float)dt;
 
 @end

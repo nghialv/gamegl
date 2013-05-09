@@ -43,5 +43,56 @@
     super.pos = GLKVector2Add(super.pos, GLKVector2MultiplyScalar(m_vel, dt));
 }
 
+- (void)moveLeft:(float)distance andDuration:(float)dt {
+    m_vel.x = -distance/dt;
+    m_vel.y = 0.0;
+    [NSTimer scheduledTimerWithTimeInterval:dt
+                                     target:[NSBlockOperation blockOperationWithBlock:^{
+        m_vel.x = 0.0;
+    }]
+                                   selector:@selector(main)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)moveRight:(float)distance andDuration:(float)dt {
+    m_vel.x = distance/dt;
+    m_vel.y = 0.0;
+    
+    [NSTimer scheduledTimerWithTimeInterval:dt
+                                     target:[NSBlockOperation blockOperationWithBlock:^{
+        m_vel.x = 0.0;
+    }]
+                                   selector:@selector(main)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)moveUp:(float)distance andDuration:(float)dt {
+    m_vel.y = distance/dt;
+    m_vel.x = 0.0;
+    
+    [NSTimer scheduledTimerWithTimeInterval:dt
+                                     target:[NSBlockOperation blockOperationWithBlock:^{
+        m_vel.y = 0.0;
+    }]
+                                   selector:@selector(main)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)moveDown:(float)distance andDuration:(float)dt {
+    m_vel.y = -distance/dt;
+    m_vel.x = 0.0;
+    
+    [NSTimer scheduledTimerWithTimeInterval:dt
+                                     target:[NSBlockOperation blockOperationWithBlock:^{
+        m_vel.y = 0.0;
+    }]
+                                   selector:@selector(main)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
 
 @end

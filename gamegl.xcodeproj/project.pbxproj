@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC44ABC0173BF9D600ABA2A3 /* orange-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC44ABBE173BF9D600ABA2A3 /* orange-ball.png */; };
+		DC44ABC1173BF9D600ABA2A3 /* red-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC44ABBF173BF9D600ABA2A3 /* red-ball.png */; };
+		DC44ABC4173BFA1200ABA2A3 /* ResouceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC44ABC3173BFA1200ABA2A3 /* ResouceManager.m */; };
 		DC52CB80173A8DAE003376F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC52CB7F173A8DAE003376F2 /* UIKit.framework */; };
 		DC52CB82173A8DAE003376F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC52CB81173A8DAE003376F2 /* Foundation.framework */; };
 		DC52CB84173A8DAE003376F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC52CB83173A8DAE003376F2 /* CoreGraphics.framework */; };
@@ -21,6 +24,13 @@
 		DC52CBA0173A8DAE003376F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC52CB81173A8DAE003376F2 /* Foundation.framework */; };
 		DC52CBA8173A8DAE003376F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBA6173A8DAE003376F2 /* InfoPlist.strings */; };
 		DC52CBAB173A8DAE003376F2 /* gameglTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC52CBAA173A8DAE003376F2 /* gameglTests.m */; };
+		DC52CBB9173A94FE003376F2 /* Entity2.m in Sources */ = {isa = PBXBuildFile; fileRef = DC52CBB8173A94FE003376F2 /* Entity2.m */; };
+		DC52CBBB173A954B003376F2 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC52CBBA173A954B003376F2 /* OpenGLES.framework */; };
+		DC52CBBD173A956B003376F2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC52CBBC173A956B003376F2 /* GLKit.framework */; };
+		DC52CBC0173A9ADC003376F2 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DC52CBBF173A9ADC003376F2 /* Sprite.m */; };
+		DC52CBC4173AAC0A003376F2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC52CBC3173AAC0A003376F2 /* GameViewController.m */; };
+		DC52CBC8173AB3D7003376F2 /* blue-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBC6173AB3D7003376F2 /* blue-ball.png */; };
+		DC52CBC9173AB3D7003376F2 /* green-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBC7173AB3D7003376F2 /* green-ball.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC44ABBE173BF9D600ABA2A3 /* orange-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "orange-ball.png"; path = "resource/orange-ball.png"; sourceTree = "<group>"; };
+		DC44ABBF173BF9D600ABA2A3 /* red-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-ball.png"; path = "resource/red-ball.png"; sourceTree = "<group>"; };
+		DC44ABC2173BFA1200ABA2A3 /* ResouceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResouceManager.h; sourceTree = "<group>"; };
+		DC44ABC3173BFA1200ABA2A3 /* ResouceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResouceManager.m; sourceTree = "<group>"; };
 		DC52CB7C173A8DAE003376F2 /* gamegl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gamegl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC52CB7F173A8DAE003376F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DC52CB81173A8DAE003376F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +67,17 @@
 		DC52CBA7173A8DAE003376F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DC52CBA9173A8DAE003376F2 /* gameglTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gameglTests.h; sourceTree = "<group>"; };
 		DC52CBAA173A8DAE003376F2 /* gameglTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gameglTests.m; sourceTree = "<group>"; };
+		DC52CBB7173A94FE003376F2 /* Entity2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity2.h; sourceTree = "<group>"; };
+		DC52CBB8173A94FE003376F2 /* Entity2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity2.m; sourceTree = "<group>"; };
+		DC52CBBA173A954B003376F2 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DC52CBBC173A956B003376F2 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		DC52CBBE173A9ADC003376F2 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		DC52CBBF173A9ADC003376F2 /* Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sprite.m; sourceTree = "<group>"; };
+		DC52CBC2173AAC0A003376F2 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		DC52CBC3173AAC0A003376F2 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		DC52CBC6173AB3D7003376F2 /* blue-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue-ball.png"; path = "resource/blue-ball.png"; sourceTree = "<group>"; };
+		DC52CBC7173AB3D7003376F2 /* green-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "green-ball.png"; path = "resource/green-ball.png"; sourceTree = "<group>"; };
+		DC52CBCA173AB7F1003376F2 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC52CBBD173A956B003376F2 /* GLKit.framework in Frameworks */,
+				DC52CBBB173A954B003376F2 /* OpenGLES.framework in Frameworks */,
 				DC52CB80173A8DAE003376F2 /* UIKit.framework in Frameworks */,
 				DC52CB82173A8DAE003376F2 /* Foundation.framework in Frameworks */,
 				DC52CB84173A8DAE003376F2 /* CoreGraphics.framework in Frameworks */,
@@ -101,6 +128,8 @@
 		DC52CB7E173A8DAE003376F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC52CBBC173A956B003376F2 /* GLKit.framework */,
+				DC52CBBA173A954B003376F2 /* OpenGLES.framework */,
 				DC52CB7F173A8DAE003376F2 /* UIKit.framework */,
 				DC52CB81173A8DAE003376F2 /* Foundation.framework */,
 				DC52CB83173A8DAE003376F2 /* CoreGraphics.framework */,
@@ -112,8 +141,11 @@
 		DC52CB85173A8DAE003376F2 /* gamegl */ = {
 			isa = PBXGroup;
 			children = (
-				DC52CB8E173A8DAE003376F2 /* AppDelegate.h */,
-				DC52CB8F173A8DAE003376F2 /* AppDelegate.m */,
+				DC52CBC5173AB3C0003376F2 /* resource */,
+				DC52CBC1173A9F21003376F2 /* gamecontext */,
+				DC52CBB6173A8E31003376F2 /* gamegl files */,
+				DC52CBB5173A8E1B003376F2 /* model loader */,
+				DC52CBB4173A8E0F003376F2 /* entities */,
 				DC52CB86173A8DAE003376F2 /* Supporting Files */,
 			);
 			path = gamegl;
@@ -150,6 +182,56 @@
 				DC52CBA6173A8DAE003376F2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DC52CBB4173A8E0F003376F2 /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				DC52CBBE173A9ADC003376F2 /* Sprite.h */,
+				DC52CBBF173A9ADC003376F2 /* Sprite.m */,
+				DC52CBB7173A94FE003376F2 /* Entity2.h */,
+				DC52CBB8173A94FE003376F2 /* Entity2.m */,
+			);
+			name = entities;
+			sourceTree = "<group>";
+		};
+		DC52CBB5173A8E1B003376F2 /* model loader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "model loader";
+			sourceTree = "<group>";
+		};
+		DC52CBB6173A8E31003376F2 /* gamegl files */ = {
+			isa = PBXGroup;
+			children = (
+				DC52CB8E173A8DAE003376F2 /* AppDelegate.h */,
+				DC52CB8F173A8DAE003376F2 /* AppDelegate.m */,
+			);
+			name = "gamegl files";
+			sourceTree = "<group>";
+		};
+		DC52CBC1173A9F21003376F2 /* gamecontext */ = {
+			isa = PBXGroup;
+			children = (
+				DC52CBCA173AB7F1003376F2 /* Common.h */,
+				DC52CBC2173AAC0A003376F2 /* GameViewController.h */,
+				DC52CBC3173AAC0A003376F2 /* GameViewController.m */,
+				DC44ABC2173BFA1200ABA2A3 /* ResouceManager.h */,
+				DC44ABC3173BFA1200ABA2A3 /* ResouceManager.m */,
+			);
+			name = gamecontext;
+			sourceTree = "<group>";
+		};
+		DC52CBC5173AB3C0003376F2 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				DC44ABBE173BF9D600ABA2A3 /* orange-ball.png */,
+				DC44ABBF173BF9D600ABA2A3 /* red-ball.png */,
+				DC52CBC6173AB3D7003376F2 /* blue-ball.png */,
+				DC52CBC7173AB3D7003376F2 /* green-ball.png */,
+			);
+			name = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +309,10 @@
 				DC52CB92173A8DAE003376F2 /* Default.png in Resources */,
 				DC52CB94173A8DAE003376F2 /* Default@2x.png in Resources */,
 				DC52CB96173A8DAE003376F2 /* Default-568h@2x.png in Resources */,
+				DC52CBC8173AB3D7003376F2 /* blue-ball.png in Resources */,
+				DC52CBC9173AB3D7003376F2 /* green-ball.png in Resources */,
+				DC44ABC0173BF9D600ABA2A3 /* orange-ball.png in Resources */,
+				DC44ABC1173BF9D600ABA2A3 /* red-ball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +349,10 @@
 			files = (
 				DC52CB8C173A8DAE003376F2 /* main.m in Sources */,
 				DC52CB90173A8DAE003376F2 /* AppDelegate.m in Sources */,
+				DC52CBB9173A94FE003376F2 /* Entity2.m in Sources */,
+				DC52CBC0173A9ADC003376F2 /* Sprite.m in Sources */,
+				DC52CBC4173AAC0A003376F2 /* GameViewController.m in Sources */,
+				DC44ABC4173BFA1200ABA2A3 /* ResouceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +458,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gamegl/gamegl-Prefix.pch";
 				INFOPLIST_FILE = "gamegl/gamegl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -379,6 +470,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gamegl/gamegl-Prefix.pch";
 				INFOPLIST_FILE = "gamegl/gamegl-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -437,6 +529,7 @@
 				DC52CBB0173A8DAE003376F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DC52CBB1173A8DAE003376F2 /* Build configuration list for PBXNativeTarget "gameglTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +538,7 @@
 				DC52CBB3173A8DAE003376F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

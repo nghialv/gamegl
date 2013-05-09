@@ -12,9 +12,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // main window
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // frame size
+    self.window.frame = CGRectMake(0,
+                                   0,
+                                   [[UIScreen mainScreen] bounds].size.width,
+                                   [[UIScreen mainScreen] bounds].size.height);
+    
+    // create game view controller
+    _rootViewController = [[GameViewController alloc] init];
+    // set as rootviewcontroller of window
+    self.window.rootViewController = _rootViewController;
+    
+    // hide status bar
+    [UIApplication sharedApplication].statusBarHidden = YES;
+    
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -12,4 +12,7 @@
 #define NUMBER_OF_BALL_IN_ROW 6
 #define NUMBER_OF_ROW 5
 
+#define DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width
+#define DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #endif

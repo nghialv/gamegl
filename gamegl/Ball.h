@@ -11,8 +11,12 @@
 
 @interface Ball : Sprite
 
+@property (nonatomic, assign) int currentCell;
+
 - (void)moveDown:(GLKVector2) startPoint andEndPoint:(GLKVector2)endPoint andDuration:(float)dt;
 - (void)moveRight;
-
+- (void)moveLeft;
+- (void)moveUp;
+- (void)moveDown;
 
 @end

@@ -100,7 +100,7 @@ typedef struct {
                           GL_FALSE,
                           sizeof(TVertex),
                           (void*)(offset + offsetof(TVertex, texture)));
-    //glColor4f(1.0, 1.0, 1.0, 0.5);
+    
     // draw
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

@@ -7,7 +7,8 @@
 //
 
 #import "GameViewController.h"
-#import "Entity2.h"
+#import "Common.h"
+#import "Ball.h"
 
 @interface GameViewController ()
 
@@ -15,7 +16,7 @@
 @property (nonatomic, strong) GLKBaseEffect *effect;
 
 @property (nonatomic, strong) NSMutableArray *ballArray;
-@property (nonatomic, strong) Entity2 *movingBall;
+@property (nonatomic, strong) Ball *movingBall;
 
 @end
 
@@ -64,18 +65,18 @@
                                                       1000.0);
     
     m_effect.transform.projectionMatrix = projectionMatrix;
-    float ballDiameter = [UIScreen mainScreen].bounds.size.width/5;
+    float ballDiameter = [UIScreen mainScreen].bounds.size.width/NUMBER_OF_BALL_IN_ROW;
     
     m_ballArray = [NSMutableArray array];
     
-    m_movingBall = [[Entity2 alloc] initWithTexture:@"red-ball.png" effect:m_effect];
+    m_movingBall = [[Ball alloc] initWithTexture:@"red-ball.png" effect:m_effect];
     m_movingBall.size = CGSizeMake(ballDiameter, ballDiameter);
     m_movingBall.pos = GLKVector2Make(ballDiameter/2, ballDiameter/2);
     
-    Entity2 *b;
+    Ball *b;
     NSString *ballColor;
     
-    for (int i =1; i < 30; i++) {
+    for (int i =1; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
         switch (rand()%4) {
             case 0:
                 ballColor = @"green-ball.png";
@@ -91,9 +92,9 @@
                 ballColor = @"blue-ball.png";
                 break;
         }
-        b = [[Entity2 alloc] initWithTexture:ballColor effect:m_effect];
+        b = [[Ball alloc] initWithTexture:ballColor effect:m_effect];
         b.size = CGSizeMake(ballDiameter, ballDiameter);
-        b.pos = GLKVector2Make((i%5)*ballDiameter + ballDiameter/2, (i/5)*ballDiameter + ballDiameter/2);
+        b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2, (i/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
         [m_ballArray addObject:b];
     }
 }
@@ -108,10 +109,11 @@
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
     
     // update
-    for (Entity2 *e in m_ballArray) {
-        [e update:1.0/60.0];
+    for (Ball *e in m_ballArray) {
+        [e update:self.timeSinceLastDraw];
     }
-    [m_movingBall update:1.0/60.0];
+    [m_movingBall update:self.timeSinceLastDraw];
+    NSLog(@"Elapse time: %f", self.timeSinceLastDraw);
     
     // clear color
     glClearColor(0.0, 0.5, 0.5, 1.0);
@@ -122,7 +124,7 @@
     
     
     // draw entities
-    for (Entity2 *e in m_ballArray) {
+    for (Ball *e in m_ballArray) {
         [e render];
     }
     
@@ -149,7 +151,9 @@
     //float x = p.x;
     //float y = [UIScreen mainScreen].bounds.size.height - p.y;
     //m_movingBall.pos = GLKVector2Make(x, y);
-    [m_movingBall moveUp:400 andDuration:0.5];
+    //[m_movingBall moveUp:400 andDuration:0.5];
+    
+    [m_movingBall moveRight];
 }
 
 @end

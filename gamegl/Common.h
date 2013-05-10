@@ -9,6 +9,7 @@
 #ifndef gamegl_Common_h
 #define gamegl_Common_h
 
-
+#define NUMBER_OF_BALL_IN_ROW 6
+#define NUMBER_OF_ROW 5
 
 #endif

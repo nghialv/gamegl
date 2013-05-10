@@ -22,5 +22,5 @@
 // animation
 - (void)linearMove:(GLKVector2)endPoint andDuration:(float)dt;
 - (void)quadraticBezierMove:(GLKVector2)endPos andControlPoint:(GLKVector2)control andDuration:(float)dt;
-
+- (void)stopMoving;
 @end

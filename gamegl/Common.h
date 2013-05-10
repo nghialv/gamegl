@@ -12,7 +12,16 @@
 #define NUMBER_OF_BALL_IN_ROW 6
 #define NUMBER_OF_ROW 5
 
+#define TRANSLATE_DURATION 0.2
+
 #define DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width
 #define DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+enum BALL_TYPE{
+    RED_BALL,
+    GREEN_BALL,
+    BLUE_BALL,
+    ORANGE_BALL
+};
 
 #endif

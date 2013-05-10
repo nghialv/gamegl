@@ -47,8 +47,6 @@
 - (GLKMatrix4)calculateModelMatrix {
     GLKMatrix4 modelMatrix = GLKMatrix4Identity;
     // translate
-    // NSLog(@"size: %f %f", m_size.width/2.0, m_size.height/2.0);
-    
     modelMatrix = GLKMatrix4Translate(modelMatrix,
                                       super.pos.x - super.size.width/2.0,
                                       super.pos.y - super.size.height/2.0,
@@ -93,8 +91,9 @@
 }
 
 - (void)quadraticBezierMove:(GLKVector2)endPos andControlPoint:(GLKVector2)control andDuration:(float)dt {
-    if (m_movingBezier)
-        return;
+    if (m_movingBezier) {
+        super.pos = m_endPoint;
+    }
     
     m_startPoint = super.pos;
     m_endPoint = endPos;
@@ -102,6 +101,14 @@
     m_duration = dt;
     m_movingBezier = YES;
     m_timer = 0.0;
+}
+
+- (void)stopMoving {
+    if (m_movingBezier) {
+        super.pos = m_endPoint;
+        m_movingBezier = NO;
+        m_timer = 0.0;
+    }
 }
 
 @end

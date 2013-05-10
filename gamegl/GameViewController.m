@@ -12,6 +12,8 @@
 
 @interface GameViewController () {
     BOOL m_ballmoving;
+    Ball* m_smovingBall;
+    Ball* m_dmovingBall;
 }
 
 @property (nonatomic, strong) EAGLContext *context;
@@ -69,31 +71,39 @@
     float ballDiameter = DEVICE_WIDTH/NUMBER_OF_BALL_IN_ROW;
     
     m_ballmoving = NO;
+    m_smovingBall = nil;
+    m_dmovingBall = nil;
     
     m_ballIndexArray = [NSMutableArray array];
     m_ballArray = [NSMutableArray array];
        
     Ball *b;
     NSString *ballColor;
+    int ballType;
     
     for (int i =0; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
         switch (rand()%4) {
             case 0:
                 ballColor = @"green-ball.png";
+                ballType = GREEN_BALL;
                 break;
             case 1:
                 ballColor = @"red-ball.png";
+                ballType = RED_BALL;
                 break;
             case 2:
                 ballColor = @"orange-ball.png";
+                ballType = ORANGE_BALL;
                 break;
             case 3:
             default:
                 ballColor = @"blue-ball.png";
+                ballType = BLUE_BALL;
                 break;
         }
         b = [[Ball alloc] initWithTexture:ballColor effect:m_effect];
         b.currentCell = i;
+        b.ballType = ballType;
         b.size = CGSizeMake(ballDiameter, ballDiameter);
         b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2, (i/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
         [m_ballArray addObject:b];
@@ -131,11 +141,19 @@
     }
     
     // draw moving ball
-    [m_movingBall render];
+    if(m_movingBall)
+        [m_movingBall render];
+    if(m_smovingBall)
+        [m_smovingBall render];
+    if(m_dmovingBall)
+        [m_dmovingBall render];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    m_ballmoving = NO;
+    if (m_ballmoving) {
+        m_ballmoving = NO;
+        [self checkPlusPoint];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -186,72 +204,57 @@
     return [m_ballArray objectAtIndex:[[m_ballIndexArray objectAtIndex:cellId] intValue]];
 }
 
+#pragma mark - Ball moving
 - (void)moveBallToRight:(int)cellId{
     if ((cellId+1) % NUMBER_OF_BALL_IN_ROW == 0)
         return;
-    int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
-    int rIndex = [[m_ballIndexArray objectAtIndex:cellId+1] intValue];
+    [self moveBall:cellId andDesCellId:cellId+1];
     
-    Ball *c = [m_ballArray objectAtIndex: cIndex];
-    Ball *r = [m_ballArray objectAtIndex:rIndex];
-    
-    [c moveRight];
-    c.currentCell = cellId + 1;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:c.currentCell];
-    [r moveLeft];
-    r.currentCell = cellId;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:rIndex] atIndexedSubscript:r.currentCell];
+    [m_smovingBall moveRight];
+    [m_dmovingBall moveLeft];
 }
 
 - (void)moveBallToLeft:(int)cellId{
     if (cellId % NUMBER_OF_BALL_IN_ROW == 0)
         return;
-    int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
-    int lIndex = [[m_ballIndexArray objectAtIndex:cellId-1] intValue];
-    
-    Ball *c = [m_ballArray objectAtIndex: cIndex];
-    Ball *l = [m_ballArray objectAtIndex: lIndex];
-    
-    [c moveLeft];
-    c.currentCell = cellId - 1;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:c.currentCell];
-    [l moveRight];
-    l.currentCell = cellId;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:lIndex] atIndexedSubscript:l.currentCell];
+    [self moveBall:cellId andDesCellId:cellId-1];
+    [m_smovingBall moveLeft];
+    [m_dmovingBall moveRight];
 }
 
 - (void)moveBallToUp:(int)cellId{
     if ((cellId/NUMBER_OF_BALL_IN_ROW) == NUMBER_OF_ROW -1)
         return;
-    int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
-    int uIndex = [[m_ballIndexArray objectAtIndex:cellId+NUMBER_OF_BALL_IN_ROW] intValue];
+    [self moveBall:cellId andDesCellId:cellId+NUMBER_OF_BALL_IN_ROW];
     
-    Ball *c = [m_ballArray objectAtIndex: cIndex];
-    Ball *u = [m_ballArray objectAtIndex: uIndex];
-    
-    [c moveUp];
-    c.currentCell = cellId + NUMBER_OF_BALL_IN_ROW;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:c.currentCell];
-    [u moveDown];
-    u.currentCell = cellId;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:uIndex] atIndexedSubscript:u.currentCell];
+    [m_smovingBall moveUp];
+    [m_dmovingBall moveDown];
 }
 
 - (void)moveBallToDown:(int)cellId{
     if ((cellId/NUMBER_OF_BALL_IN_ROW) == 0)
         return;
+    [self moveBall:cellId andDesCellId:cellId-NUMBER_OF_BALL_IN_ROW];
+    [m_smovingBall moveDown];
+    [m_dmovingBall moveUp];
+}
+
+- (void)moveBall:(int)cellId andDesCellId:(int)desCellId {
     int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
-    int dIndex = [[m_ballIndexArray objectAtIndex:cellId-NUMBER_OF_BALL_IN_ROW] intValue];
+    int dIndex = [[m_ballIndexArray objectAtIndex:desCellId] intValue];
     
-    Ball *c = [m_ballArray objectAtIndex: cIndex];
-    Ball *d = [m_ballArray objectAtIndex: dIndex];
+    m_smovingBall = [m_ballArray objectAtIndex: cIndex];
+    m_dmovingBall = [m_ballArray objectAtIndex: dIndex];
     
-    [c moveDown];
-    c.currentCell = cellId - NUMBER_OF_BALL_IN_ROW;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:c.currentCell];
-    [d moveUp];
-    d.currentCell = cellId;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:dIndex] atIndexedSubscript:d.currentCell];
+    m_smovingBall.currentCell = desCellId;
+    [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:m_smovingBall.currentCell];
+    m_dmovingBall.currentCell = cellId;
+    [m_ballIndexArray setObject:[NSNumber numberWithInt:dIndex] atIndexedSubscript:m_dmovingBall.currentCell];
+}
+
+#pragma mark - point checking
+- (void)checkPlusPoint {
+    
 }
 
 @end

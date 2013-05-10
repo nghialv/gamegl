@@ -194,8 +194,6 @@
 				DCADA24F173CF308009E0159 /* Texture2.m */,
 				DCADA251173CF384009E0159 /* Sprite.h */,
 				DCADA252173CF384009E0159 /* Sprite.m */,
-				DCADA254173CF4D0009E0159 /* Ball.h */,
-				DCADA255173CF4D0009E0159 /* Ball.m */,
 			);
 			name = entities;
 			sourceTree = "<group>";
@@ -210,8 +208,11 @@
 		DC52CBB6173A8E31003376F2 /* gamegl files */ = {
 			isa = PBXGroup;
 			children = (
+				DC52CBCA173AB7F1003376F2 /* Common.h */,
 				DC52CB8E173A8DAE003376F2 /* AppDelegate.h */,
 				DC52CB8F173A8DAE003376F2 /* AppDelegate.m */,
+				DCADA254173CF4D0009E0159 /* Ball.h */,
+				DCADA255173CF4D0009E0159 /* Ball.m */,
 			);
 			name = "gamegl files";
 			sourceTree = "<group>";
@@ -219,7 +220,6 @@
 		DC52CBC1173A9F21003376F2 /* gamecontext */ = {
 			isa = PBXGroup;
 			children = (
-				DC52CBCA173AB7F1003376F2 /* Common.h */,
 				DC52CBC2173AAC0A003376F2 /* GameViewController.h */,
 				DC52CBC3173AAC0A003376F2 /* GameViewController.m */,
 				DC44ABC2173BFA1200ABA2A3 /* ResouceManager.h */,

@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign) GLKVector2 pos;
 @property (nonatomic, assign) CGSize size;
+@property (nonatomic, assign) BOOL display;
 
 - (id) initWithTexture:(NSString *)fileName effect:(GLKBaseEffect *)effect;
 - (void)setTexture:(NSString*)fileName;

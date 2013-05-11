@@ -38,6 +38,7 @@ typedef struct {
 @synthesize quad = m_quad;
 @synthesize pos = m_pos;
 @synthesize size = m_size;
+@synthesize display = m_display;
 
 - (id)initWithTexture:(NSString *)fileName effect:(GLKBaseEffect *)effect {
     if (self = [super init]) {
@@ -47,6 +48,7 @@ typedef struct {
     // default pos and size
     m_pos = GLKVector2Make(0.0, 0.0);
     m_size = CGSizeMake(m_textureInfo.width, m_textureInfo.height);
+    m_display = YES;
     // set point
     m_quad.bl.point = CGPointMake(0.0, 0.0);
     m_quad.br.point = CGPointMake(m_size.width, 0.0);
@@ -75,6 +77,9 @@ typedef struct {
 }
 
 - (void)render{
+    if (!m_display)
+        return;
+    
     // set texture
     m_effect.texture2d0.name = m_textureInfo.name;
     m_effect.texture2d0.enabled = YES;

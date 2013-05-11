@@ -203,7 +203,7 @@
                 point++;
             else {
                 if (point > 1) {
-                    NSLog(@"row: %d : point = %d", i, point+1);
+                    NSLog(@"col: %d : point = %d", i, point+1);
                     sumPoint += (point +1);
                     for (int k = curCell-NUMBER_OF_BALL_IN_ROW; k>= curCell-(point+1)*NUMBER_OF_BALL_IN_ROW; k-= NUMBER_OF_BALL_IN_ROW)
                         markBall[k] = YES;
@@ -235,7 +235,8 @@
     NSLog(@"After resort");
     
     // resort table
-    [self resortTable];
+    if (sumPoint > 0)
+        [self resortTable];
     return sumPoint;
 }
 
@@ -249,6 +250,7 @@
         }
     }
     [self showTable];
+    [self checkPlusPoint];
 }
 
 - (void)showTable{

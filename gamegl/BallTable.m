@@ -21,6 +21,7 @@
 @property (nonatomic, strong) Ball *movingBall;
 
 - (int)checkPlusPoint;
+- (void)addNewBall;
 
 @end
 
@@ -250,7 +251,6 @@
         }
     }
     [self showTable];
-    [self checkPlusPoint];
 }
 
 - (void)showTable{
@@ -264,7 +264,50 @@
 }
 
 - (void)addNewBall {
-    
+    [self showTable];
+    int curCell;
+    for (int i=0; i<NUMBER_OF_ROW; i++) {
+        for (int j=0; j<NUMBER_OF_BALL_IN_ROW; j++) {
+            curCell = i*NUMBER_OF_BALL_IN_ROW+j;
+            if ([[m_ballIndexArray objectAtIndex:curCell] intValue] == -1) {
+                int ballType = [self generateBallTypeAtCell:curCell];
+                int freeBallIndex = [self getFreeBallIndex];
+                if (freeBallIndex!=-1) {
+                    Ball *b = [m_ballArray objectAtIndex:freeBallIndex];
+                    [b setPos:[self getPosAtCell:curCell]];
+                    [b setCurrentCell:curCell];
+                    [b setBallType:ballType];
+                    [b setDisplay:YES];
+                    switch (ballType) {
+                        case GREEN_BALL:
+                            [b setTexture:@"green-ball.png"];
+                            break;
+                        case RED_BALL:
+                            [b setTexture:@"red-ball.png"];
+                            break;
+                        case BLUE_BALL:
+                            [b setTexture:@"blue-ball.png"];
+                            break;
+                        case ORANGE_BALL:
+                            [b setTexture:@"orange-ball.png"];
+                            break;
+                        default:
+                            break;
+                    }
+                    [m_ballIndexArray setObject:[NSNumber numberWithInt:freeBallIndex] atIndexedSubscript:curCell];
+                }
+            }
+        }
+    }
+}
+
+- (int)getFreeBallIndex {
+    for (int i=0; i<[m_ballArray count]; i++) {
+        Ball *b = [m_ballArray objectAtIndex:i];
+        if(!b.display)
+            return i;
+    }
+    return -1;
 }
 
 - (GLKVector2)getPosAtCell:(int)cellId {
@@ -312,16 +355,20 @@
         m_ballmoving = NO;
         NSLog(@"Touch ended");
         [self showTable];
-        
-        [NSTimer scheduledTimerWithTimeInterval:0.5
-                                         target:self
-                                       selector:@selector(checkPlusPoint)
-                                       userInfo:nil
-                                        repeats:NO];
-        //point = [self checkPlusPoint];
-        //while ((point = [self checkPlusPoint]) > 0) {
-        //    NSLog(@"CALCULATE POINT");
-        //}
+        int point;
+        int sumPoint = 0;
+
+        while ((point = [self checkPlusPoint]) > 0) {
+            NSLog(@"CALCULATE POINT");
+            sumPoint += point;
+        }
+        if (sumPoint > 0) {
+            [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(addNewBall)
+                                           userInfo:nil
+                                            repeats:NO];
+        }
     }
 }
 
@@ -395,6 +442,7 @@
         [ball moveDownFromHere:[self getPosAtCell:desCell] andDuration:0.2];
         [m_ballIndexArray setObject:[NSNumber numberWithInt:-1]
                  atIndexedSubscript:ball.currentCell];
+        [ball setCurrentCell:desCell];
         [m_ballIndexArray setObject:[NSNumber numberWithInteger:[m_ballArray indexOfObject:ball]]
                  atIndexedSubscript:desCell];
     }

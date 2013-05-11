@@ -16,6 +16,7 @@
 
 #define DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width
 #define DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define BALL_DIAMETER DEVICE_WIDTH/NUMBER_OF_BALL_IN_ROW
 
 enum BALL_TYPE{
     RED_BALL,

@@ -15,6 +15,7 @@
 @property (nonatomic, assign) CGSize size;
 
 - (id) initWithTexture:(NSString *)fileName effect:(GLKBaseEffect *)effect;
+- (void)setTexture:(NSString*)fileName;
 - (GLKMatrix4) calculateModelMatrix;
 - (void) render;
 

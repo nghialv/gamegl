@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC2A02F6173D641900C141E5 /* BallTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2A02F5173D641900C141E5 /* BallTable.m */; };
 		DC44ABC0173BF9D600ABA2A3 /* orange-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC44ABBE173BF9D600ABA2A3 /* orange-ball.png */; };
 		DC44ABC1173BF9D600ABA2A3 /* red-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC44ABBF173BF9D600ABA2A3 /* red-ball.png */; };
 		DC44ABC4173BFA1200ABA2A3 /* ResouceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC44ABC3173BFA1200ABA2A3 /* ResouceManager.m */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC2A02F4173D641900C141E5 /* BallTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallTable.h; sourceTree = "<group>"; };
+		DC2A02F5173D641900C141E5 /* BallTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallTable.m; sourceTree = "<group>"; };
 		DC44ABBE173BF9D600ABA2A3 /* orange-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "orange-ball.png"; path = "resource/orange-ball.png"; sourceTree = "<group>"; };
 		DC44ABBF173BF9D600ABA2A3 /* red-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-ball.png"; path = "resource/red-ball.png"; sourceTree = "<group>"; };
 		DC44ABC2173BFA1200ABA2A3 /* ResouceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResouceManager.h; sourceTree = "<group>"; };
@@ -144,11 +147,9 @@
 		DC52CB85173A8DAE003376F2 /* gamegl */ = {
 			isa = PBXGroup;
 			children = (
-				DC52CBC5173AB3C0003376F2 /* resource */,
-				DC52CBC1173A9F21003376F2 /* gamecontext */,
 				DC52CBB6173A8E31003376F2 /* gamegl files */,
-				DC52CBB5173A8E1B003376F2 /* model loader */,
-				DC52CBB4173A8E0F003376F2 /* entities */,
+				DC52CBC5173AB3C0003376F2 /* resource */,
+				DC52CBC1173A9F21003376F2 /* common */,
 				DC52CB86173A8DAE003376F2 /* Supporting Files */,
 			);
 			path = gamegl;
@@ -211,21 +212,25 @@
 				DC52CBCA173AB7F1003376F2 /* Common.h */,
 				DC52CB8E173A8DAE003376F2 /* AppDelegate.h */,
 				DC52CB8F173A8DAE003376F2 /* AppDelegate.m */,
+				DC2A02F4173D641900C141E5 /* BallTable.h */,
+				DC2A02F5173D641900C141E5 /* BallTable.m */,
 				DCADA254173CF4D0009E0159 /* Ball.h */,
 				DCADA255173CF4D0009E0159 /* Ball.m */,
 			);
 			name = "gamegl files";
 			sourceTree = "<group>";
 		};
-		DC52CBC1173A9F21003376F2 /* gamecontext */ = {
+		DC52CBC1173A9F21003376F2 /* common */ = {
 			isa = PBXGroup;
 			children = (
 				DC52CBC2173AAC0A003376F2 /* GameViewController.h */,
 				DC52CBC3173AAC0A003376F2 /* GameViewController.m */,
 				DC44ABC2173BFA1200ABA2A3 /* ResouceManager.h */,
 				DC44ABC3173BFA1200ABA2A3 /* ResouceManager.m */,
+				DC52CBB4173A8E0F003376F2 /* entities */,
+				DC52CBB5173A8E1B003376F2 /* model loader */,
 			);
-			name = gamecontext;
+			name = common;
 			sourceTree = "<group>";
 		};
 		DC52CBC5173AB3C0003376F2 /* resource */ = {
@@ -359,6 +364,7 @@
 				DCADA250173CF308009E0159 /* Texture2.m in Sources */,
 				DCADA253173CF384009E0159 /* Sprite.m in Sources */,
 				DCADA256173CF4D0009E0159 /* Ball.m in Sources */,
+				DC2A02F6173D641900C141E5 /* BallTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

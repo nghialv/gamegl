@@ -61,6 +61,10 @@ typedef struct {
     return self;
 }
 
+- (void)setTexture:(NSString *)fileName {
+    m_textureInfo = [[ResouceManager sharedInstance] getTextureInfo:fileName];
+}
+
 - (GLKMatrix4)calculateModelMatrix {
     GLKMatrix4 modelMatrix = GLKMatrix4Identity;
     modelMatrix = GLKMatrix4Translate(modelMatrix,

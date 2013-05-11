@@ -61,20 +61,20 @@
     for (int i =0; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
         switch ([self generateBallTypeAtCell:i]) {
             case RED_BALL:
-                ballColor = @"red-ball.png";
+                ballColor = RED_BALL_FILE_NAME;
                 ballType = RED_BALL;
                 break;
             case GREEN_BALL:
-                ballColor = @"green-ball.png";
+                ballColor = GREEN_BALL_FILE_NAME;
                 ballType = GREEN_BALL;
                 break;
             case BLUE_BALL:
-                ballColor = @"blue-ball.png";
+                ballColor = BLUE_BALL_FILE_NAME;
                 ballType = BLUE_BALL;
                 break;
             case ORANGE_BALL:
             default:
-                ballColor = @"orange-ball.png";
+                ballColor = ORANGE_BALL_FILE_NAME;
                 ballType = ORANGE_BALL;
                 break;
         }
@@ -129,7 +129,7 @@
 
 #pragma mark - gennerate ball for a cell
 - (int)generateBallTypeAtCell:(int)cellId {
-    int num= arc4random()%4;
+    int num= arc4random()%NUMBER_OF_BALL_TYPE;
     int l1=-1, l2=-1, d1=-1, d2=-1, r1 = -1, r2 = -1;
     
     if (cellId/NUMBER_OF_BALL_IN_ROW > 1) {
@@ -141,13 +141,13 @@
         l2 = [self getBallTypeAtCell:cellId-2];
     }
     if (l1 == l2 && num == l1) {
-        num = (num+1)%4;
+        num = (num+1)%NUMBER_OF_BALL_TYPE;
         if (d1 == d2 && num == d1)
-            num = (num+1)%4;
+            num = (num+1)%NUMBER_OF_BALL_TYPE;
     }else if (d1 == d2 && num == d1) {
-        num = (num+1)%4;
+        num = (num+1)%NUMBER_OF_BALL_TYPE;
         if (l1 == l2 && num == l1)
-            num = (num+1)%4;
+            num = (num+1)%NUMBER_OF_BALL_TYPE;
     }
     if (cellId%NUMBER_OF_BALL_IN_ROW < (NUMBER_OF_BALL_IN_ROW-2)) {
         if ([[m_ballIndexArray objectAtIndex:cellId+1] intValue] != -1 &&
@@ -155,7 +155,7 @@
             r1 = [self getBallTypeAtCell:cellId+1];
             r2 = [self getBallTypeAtCell:cellId+2];
             if (r1 == r2 && num == r1)
-                num = (num+1)%4;
+                num = (num+1)%NUMBER_OF_BALL_TYPE;
         }
     }
     return num;
@@ -280,16 +280,16 @@
                     [b setDisplay:YES];
                     switch (ballType) {
                         case GREEN_BALL:
-                            [b setTexture:@"green-ball.png"];
+                            [b setTexture:GREEN_BALL_FILE_NAME];
                             break;
                         case RED_BALL:
-                            [b setTexture:@"red-ball.png"];
+                            [b setTexture:RED_BALL_FILE_NAME];
                             break;
                         case BLUE_BALL:
-                            [b setTexture:@"blue-ball.png"];
+                            [b setTexture:BLUE_BALL_FILE_NAME];
                             break;
                         case ORANGE_BALL:
-                            [b setTexture:@"orange-ball.png"];
+                            [b setTexture:ORANGE_BALL_FILE_NAME];
                             break;
                         default:
                             break;

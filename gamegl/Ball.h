@@ -15,6 +15,7 @@
 @property (nonatomic, assign) int ballType;
 
 - (void)moveDown:(GLKVector2) startPoint andEndPoint:(GLKVector2)endPoint andDuration:(float)dt;
+- (void)moveDownFromHere:(GLKVector2)endPoint andDuration:(float)dt;
 - (void)moveRight;
 - (void)moveLeft;
 - (void)moveUp;

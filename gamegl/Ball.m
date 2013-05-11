@@ -19,6 +19,11 @@
     [self linearMove:endPoint andDuration:dt];
 }
 
+- (void)moveDownFromHere:(GLKVector2)endPoint andDuration:(float)dt {
+    [self stopMoving];
+    [self linearMove:endPoint andDuration:dt];
+}
+
 - (void)moveRight {
     [self stopMoving];
     [self quadraticBezierMove:GLKVector2Add(super.pos, GLKVector2Make(super.size.width, 0.0)) andControlPoint:GLKVector2Add(super.pos, GLKVector2Make(super.size.width/2, -super.size.height)) andDuration:TRANSLATE_DURATION];

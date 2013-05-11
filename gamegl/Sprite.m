@@ -14,8 +14,9 @@
 @property (nonatomic, assign) GLKVector2 endPoint;
 @property (nonatomic, assign) GLKVector2 controlPoint;
 @property (nonatomic, assign) float duration;
-@property (nonatomic, assign) BOOL movingBezier;
+@property (nonatomic, assign) BOOL isMovingByBezier;
 @property (nonatomic, assign) float timer;
+@property (nonatomic, readonly) NSTimer *nTimer;
 
 @end
 
@@ -29,8 +30,9 @@
 @synthesize endPoint = m_endPoint;
 @synthesize controlPoint = m_controlPoint;
 @synthesize duration = m_duration;
-@synthesize movingBezier = m_movingBezier;
+@synthesize isMovingByBezier = m_isMovingByBezier;
 @synthesize timer = m_timer;
+@synthesize nTimer = m_nTimer;
 
 - (id)initWithTexture:(NSString *)fileName effect:(GLKBaseEffect *)effect {
     if(self = [super initWithTexture:fileName effect:effect]) {
@@ -38,7 +40,7 @@
         m_accel = GLKVector2Make(0.0, 0.0);
         m_scale = GLKVector2Make(1.0, 1.0);
         
-        m_movingBezier = NO;
+        m_isMovingByBezier = NO;
         m_timer = 0.0;
     }
     return self;
@@ -58,14 +60,14 @@
 }
 
 - (void)update:(float)dt {
-    if (!m_movingBezier) {
+    if (!m_isMovingByBezier) {
         m_vel = GLKVector2Add(m_vel, GLKVector2MultiplyScalar(m_accel, dt));
         super.pos = GLKVector2Add(super.pos, GLKVector2MultiplyScalar(m_vel, dt));
     }else {
         m_timer += dt;
         if (m_timer >= m_duration) {
             super.pos = m_endPoint;
-            m_movingBezier = NO;
+            m_isMovingByBezier = NO;
             m_timer = 0.0;
         }else {
             float t = m_timer/m_duration;
@@ -77,13 +79,15 @@
 }
 
 - (void)linearMove:(GLKVector2)endPoint andDuration:(float)dt {
+    m_endPoint = endPoint;
     m_vel.x = (endPoint.x - super.pos.x)/dt;
     m_vel.y = (endPoint.y - super.pos.y)/dt;
     
-    [NSTimer scheduledTimerWithTimeInterval:dt
+    m_nTimer = [NSTimer scheduledTimerWithTimeInterval:dt
                                      target:[NSBlockOperation blockOperationWithBlock:^{
         m_vel.x = 0.0;
         m_vel.y = 0.0;
+        super.pos = m_endPoint;
     }]
                                    selector:@selector(main)
                                    userInfo:nil
@@ -91,24 +95,26 @@
 }
 
 - (void)quadraticBezierMove:(GLKVector2)endPos andControlPoint:(GLKVector2)control andDuration:(float)dt {
-    if (m_movingBezier) {
-        super.pos = m_endPoint;
-    }
-    
     m_startPoint = super.pos;
     m_endPoint = endPos;
     m_controlPoint = control;
     m_duration = dt;
-    m_movingBezier = YES;
+    m_isMovingByBezier = YES;
     m_timer = 0.0;
 }
 
 - (void)stopMoving {
-    if (m_movingBezier) {
+    if (m_isMovingByBezier || GLKVector2Length(m_vel) != 0.0) {
         super.pos = m_endPoint;
-        m_movingBezier = NO;
-        m_timer = 0.0;
     }
+    m_isMovingByBezier = NO;
+    m_timer = 0.0;
+    m_accel.x = 0.0;
+    m_accel.y = 0.0;
+    m_vel.x = 0.0;
+    m_vel.y = 0.0;
+    if(m_nTimer)
+        [m_nTimer invalidate];
 }
 
 @end

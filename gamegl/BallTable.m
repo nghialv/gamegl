@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableArray *ballArray;
 @property (nonatomic, strong) Ball *movingBall;
 
+- (int)checkPlusPoint;
+
 @end
 
 // implementation
@@ -111,11 +113,17 @@
 
 #pragma mark - get ball
 - (Ball*)getBallAtCell:(int)cellId {
-    return [m_ballArray objectAtIndex:[[m_ballIndexArray objectAtIndex:cellId] intValue]];
+    int index = [[m_ballIndexArray objectAtIndex:cellId] intValue];
+    if (index == -1)
+        return nil;
+    return [m_ballArray objectAtIndex:index];
 }
 
 - (int)getBallTypeAtCell:(int)cellId {
-    return [[m_ballArray objectAtIndex:[[m_ballIndexArray objectAtIndex:cellId] intValue]] ballType];
+    int index = [[m_ballIndexArray objectAtIndex:cellId] intValue];
+    if (index == -1)
+        return -1;
+    return [[m_ballArray objectAtIndex:index] ballType];
 }
 
 #pragma mark - gennerate ball for a cell
@@ -153,7 +161,7 @@
 }
 
 #pragma mark - point calculate
-- (void)checkPlusPoint {
+- (int)checkPlusPoint {
     int sumPoint = 0, point, preType, curType, curCell;
     BOOL markBall[NUMBER_OF_ROW*NUMBER_OF_BALL_IN_ROW] = {NO};
     
@@ -164,7 +172,7 @@
         for (int j=0; j<NUMBER_OF_BALL_IN_ROW; j++) {
             curCell = i*NUMBER_OF_BALL_IN_ROW+j;
             curType = [self getBallTypeAtCell:curCell];
-            if (curType == preType)
+            if (curType == preType && curType != -1)
                 point++;
             else {
                 if (point > 1) {
@@ -191,7 +199,7 @@
         for (int j=0; j<NUMBER_OF_ROW; j++) {
             curCell = j*NUMBER_OF_BALL_IN_ROW+i;
             curType = [self getBallTypeAtCell:curCell];
-            if (curType == preType)
+            if (curType == preType && curType != -1)
                 point++;
             else {
                 if (point > 1) {
@@ -216,9 +224,50 @@
     
     // remove ball
     for (int i=0; i<NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
-        if (markBall[i])
+        if (markBall[i]) {
             [[self getBallAtCell:i] setDisplay:NO];
+            [m_ballIndexArray setObject:[NSNumber numberWithInt:-1] atIndexedSubscript:i];
+        }
+        // add effect
     }
+    NSLog(@"After check");
+    [self showTable];
+    NSLog(@"After resort");
+    
+    // resort table
+    [self resortTable];
+    return sumPoint;
+}
+
+- (void)resortTable {
+    Ball *curBall = nil;
+    for(int i = 0; i < NUMBER_OF_BALL_IN_ROW; i++) {
+        for(int j=1; j < NUMBER_OF_ROW; j++) {
+            curBall = [self getBallAtCell:j*NUMBER_OF_BALL_IN_ROW+i];
+            if (curBall)
+                [self moveBallDown:curBall];
+        }
+    }
+    [self showTable];
+}
+
+- (void)showTable{
+    for(int i=NUMBER_OF_ROW-1; i>=0; i--) {
+        for(int j=0; j<NUMBER_OF_BALL_IN_ROW; j++) {
+            printf("%2d(%2d)    ", [self getBallTypeAtCell:i*NUMBER_OF_BALL_IN_ROW+j],
+                   [[m_ballIndexArray objectAtIndex:i*NUMBER_OF_BALL_IN_ROW+j] intValue]);
+        }
+        NSLog(@"A");
+    }
+}
+
+- (void)addNewBall {
+    
+}
+
+- (GLKVector2)getPosAtCell:(int)cellId {
+    float ballDiameter = BALL_DIAMETER;
+    return GLKVector2Make((cellId%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2, (cellId/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
 }
 
 #pragma mark - event
@@ -259,7 +308,18 @@
 - (void)touchesEnded:(CGPoint)touchPoint {
     if (m_ballmoving) {
         m_ballmoving = NO;
-        [self checkPlusPoint];
+        NSLog(@"Touch ended");
+        [self showTable];
+        
+        [NSTimer scheduledTimerWithTimeInterval:0.5
+                                         target:self
+                                       selector:@selector(checkPlusPoint)
+                                       userInfo:nil
+                                        repeats:NO];
+        //point = [self checkPlusPoint];
+        //while ((point = [self checkPlusPoint]) > 0) {
+        //    NSLog(@"CALCULATE POINT");
+        //}
     }
 }
 
@@ -300,6 +360,12 @@
 }
 
 - (void)moveBall:(int)cellId andDesCellId:(int)desCellId {
+    [self showTable];
+    NSLog(@"Moving From: [%d, %d] To: [%d, %d]", cellId/NUMBER_OF_BALL_IN_ROW,
+          cellId%NUMBER_OF_BALL_IN_ROW,
+          desCellId/NUMBER_OF_BALL_IN_ROW,
+          desCellId%NUMBER_OF_BALL_IN_ROW);
+    
     int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
     int dIndex = [[m_ballIndexArray objectAtIndex:desCellId] intValue];
     
@@ -310,6 +376,26 @@
     [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:m_smovingBall.currentCell];
     m_dmovingBall.currentCell = cellId;
     [m_ballIndexArray setObject:[NSNumber numberWithInt:dIndex] atIndexedSubscript:m_dmovingBall.currentCell];
+    [self showTable];
+}
+
+- (void)moveBallDown:(Ball*)ball {
+    int i = ball.currentCell%NUMBER_OF_BALL_IN_ROW;
+    int j = ball.currentCell/NUMBER_OF_BALL_IN_ROW;
+    int desCell = -1;
+    for (int k=0; k<j; k++) {
+        if ([[m_ballIndexArray objectAtIndex:k*NUMBER_OF_BALL_IN_ROW+i] intValue] == -1) {
+            desCell = k*NUMBER_OF_BALL_IN_ROW+i;
+            break;
+        }
+    }
+    if (desCell != -1) {
+        [ball moveDownFromHere:[self getPosAtCell:desCell] andDuration:0.2];
+        [m_ballIndexArray setObject:[NSNumber numberWithInt:-1]
+                 atIndexedSubscript:ball.currentCell];
+        [m_ballIndexArray setObject:[NSNumber numberWithInteger:[m_ballArray indexOfObject:ball]]
+                 atIndexedSubscript:desCell];
+    }
 }
 
 @end

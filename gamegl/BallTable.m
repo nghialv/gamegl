@@ -20,6 +20,7 @@
     int m_checkingCount;
 }
 
+@property (nonatomic, strong) GLKBaseEffect *effect;
 @property (nonatomic, strong) NSMutableArray *ballIndexArray;
 @property (nonatomic, strong) NSMutableArray *ballArray;
 @property (nonatomic, strong) Ball *movingBall;
@@ -32,6 +33,7 @@
 // implementation
 @implementation BallTable
 
+@synthesize effect = m_effect;
 @synthesize ballIndexArray = m_ballIndexArray;
 @synthesize ballArray = m_ballArray;
 @synthesize movingBall = m_movingBall;
@@ -39,6 +41,7 @@
 
 - (id)initWithEffect:(GLKBaseEffect*)effect {
     if (self = [super init]) {
+        m_effect = effect;
         m_ballmoving = NO;
         m_smovingBall = nil;
         m_dmovingBall = nil;
@@ -53,12 +56,11 @@
         float ballDiameter = BALL_DIAMETER;
     
         // setbackground
-        m_background = [[Texture2 alloc] initWithTexture:BALL_TABLE_BACKGROUND effect:effect];
+        m_background = [[Texture2 alloc] initWithTexture:BALL_TABLE_BACKGROUND effect:m_effect];
         [m_background setPos:GLKVector2Make(ballDiameter*NUMBER_OF_BALL_IN_ROW/2, ballDiameter*NUMBER_OF_ROW/2)];
         [m_background setSize:CGSizeMake(ballDiameter*NUMBER_OF_BALL_IN_ROW, ballDiameter*NUMBER_OF_ROW)];
     
         m_ballArray = [NSMutableArray array];
-    
         Ball *b;
         NSString *ballColor;
         int ballType;
@@ -83,14 +85,13 @@
                     ballType = ORANGE_BALL;
                     break;
             }
-            b = [[Ball alloc] initWithTexture:ballColor effect:effect];
-            b.currentCell = i;
+            b = [[Ball alloc] initWithTexture:ballColor effect:m_effect];
             b.ballType = ballType;
             b.size = CGSizeMake(ballDiameter, ballDiameter);
-            b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2,
-                               (i/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
+            b.pos = [self getPosAtCell:i];
+            
             [m_ballArray addObject:b];
-            [m_ballIndexArray setObject:[NSNumber numberWithInt:b.currentCell] atIndexedSubscript:i];
+            [self setBallAtCell:b atCell:i];
         }
     }
     return self;
@@ -155,7 +156,6 @@
 
 - (void)touchesEnded:(CGPoint)touchPoint {
     if (m_ballmoving && !m_checkingPoint) {
-        
         //[self showTable];
         m_checkingPoint = YES;
         m_checkingCount = 0;
@@ -165,6 +165,10 @@
 
 #pragma mark - point calculate
 - (int)checkPlusPoint {
+    [self showTable];
+    
+    [self stopAllBalls];
+    
     int sumPoint = 0, point, preType, curType, curCell;
     BOOL markBall[NUMBER_OF_ROW*NUMBER_OF_BALL_IN_ROW] = {NO};
     
@@ -234,27 +238,27 @@
         // add effect
     }
     
-    //NSLog(@"After check");
-    //[self showTable];
-    //NSLog(@"After resort");
-    
     m_checkingCount++;
     NSLog(@"Checking Count: %d", m_checkingPoint);
     
     // resort table
-    if (sumPoint > 0)
-        [self resortTable];
+    if (sumPoint > 0) {
+        [NSTimer scheduledTimerWithTimeInterval:0.5
+                                         target:self
+                                       selector:@selector(resortTable)
+                                       userInfo:nil
+                                        repeats:NO];
+    }
     else if (m_checkingCount > 1) {
         m_checkingCount = 0;
-        m_checkingPoint = NO;
         NSLog(@"Add new ball");
         [NSTimer scheduledTimerWithTimeInterval:1.0
                                          target:self
                                        selector:@selector(addNewBall)
                                        userInfo:nil
                                         repeats:NO];
-    }
-    
+    }else
+        m_checkingPoint = NO;
     return sumPoint;
 }
 
@@ -267,8 +271,7 @@
                 [self moveBallDown:curBall];
         }
     }
-    //[self showTable];
-    [NSTimer scheduledTimerWithTimeInterval:2.5
+    [NSTimer scheduledTimerWithTimeInterval:BALL_DOWN_DURATION
                                      target:self
                                    selector:@selector(checkPlusPoint)
                                    userInfo:nil
@@ -277,6 +280,7 @@
 
 - (void)addNewBall {
     //[self showTable];
+    
     int curCell;
     for (int i=0; i<NUMBER_OF_ROW; i++) {
         for (int j=0; j<NUMBER_OF_BALL_IN_ROW; j++) {
@@ -284,38 +288,42 @@
             if ([[m_ballIndexArray objectAtIndex:curCell] intValue] == -1) {
                 int ballType = [self generateBallTypeAtCell:curCell];
                 int freeBallIndex = [self getFreeBallIndex];
-                if (freeBallIndex!=-1) {
-                    Ball *b = [m_ballArray objectAtIndex:freeBallIndex];
-                    [b setPos:[self getPosAtCell:curCell]];
-                    [b setCurrentCell:curCell];
-                    [b setBallType:ballType];
-                    [b setDisplay:YES];
-                    switch (ballType) {
-                        case GREEN_BALL:
-                            [b setTexture:GREEN_BALL_FILE_NAME];
-                            break;
-                        case RED_BALL:
-                            [b setTexture:RED_BALL_FILE_NAME];
-                            break;
-                        case BLUE_BALL:
-                            [b setTexture:BLUE_BALL_FILE_NAME];
-                            break;
-                        case ORANGE_BALL:
-                            [b setTexture:ORANGE_BALL_FILE_NAME];
-                            break;
-                        default:
-                            break;
-                    }
-                    [m_ballIndexArray setObject:[NSNumber numberWithInt:freeBallIndex] atIndexedSubscript:curCell];
+                Ball *b;
+                if (freeBallIndex!=-1)
+                    b = [m_ballArray objectAtIndex:freeBallIndex];
+                else {
+                    b = [[Ball alloc] initWithTexture:GREEN_BALL_FILE_NAME effect:m_effect];
+                    [m_ballArray addObject:b];
                 }
+                switch (ballType) {
+                    case GREEN_BALL:
+                        [b setTexture:GREEN_BALL_FILE_NAME];
+                        break;
+                    case RED_BALL:
+                        [b setTexture:RED_BALL_FILE_NAME];
+                        break;
+                    case BLUE_BALL:
+                        [b setTexture:BLUE_BALL_FILE_NAME];
+                        break;
+                    case ORANGE_BALL:
+                    default:
+                        [b setTexture:ORANGE_BALL_FILE_NAME];
+                        break;
+                }
+                
+                b.ballType = ballType;
+                b.size = CGSizeMake(BALL_DIAMETER, BALL_DIAMETER);
+                b.pos = [self getPosAtCell:curCell];
+                [b setDisplay:YES];
+                
+                [self setBallAtCell:b atCell:curCell];
             }
         }
     }
+    
     NSLog(@"Added new ball");
     m_ballmoving = NO;
     m_checkingPoint = NO;
-    
-    //[self showTable];
 }
 
 #pragma mark - get ball
@@ -333,40 +341,6 @@
     return [[m_ballArray objectAtIndex:index] ballType];
 }
 
-#pragma mark - gennerate ball for a cell
-- (int)generateBallTypeAtCell:(int)cellId {
-    int num= arc4random()%NUMBER_OF_BALL_TYPE;
-    int l1=-1, l2=-1, d1=-1, d2=-1, r1 = -1, r2 = -1;
-    
-    if (cellId/NUMBER_OF_BALL_IN_ROW > 1) {
-        d1 = [self getBallTypeAtCell:cellId-NUMBER_OF_BALL_IN_ROW];
-        d2 = [self getBallTypeAtCell:cellId-2*NUMBER_OF_BALL_IN_ROW];
-    }
-    if (cellId%NUMBER_OF_BALL_IN_ROW > 1) {
-        l1 = [self getBallTypeAtCell:cellId-1];
-        l2 = [self getBallTypeAtCell:cellId-2];
-    }
-    if (l1 == l2 && num == l1) {
-        num = (num+1)%NUMBER_OF_BALL_TYPE;
-        if (d1 == d2 && num == d1)
-            num = (num+1)%NUMBER_OF_BALL_TYPE;
-    }else if (d1 == d2 && num == d1) {
-        num = (num+1)%NUMBER_OF_BALL_TYPE;
-        if (l1 == l2 && num == l1)
-            num = (num+1)%NUMBER_OF_BALL_TYPE;
-    }
-    if (cellId%NUMBER_OF_BALL_IN_ROW < (NUMBER_OF_BALL_IN_ROW-2)) {
-        if ([[m_ballIndexArray objectAtIndex:cellId+1] intValue] != -1 &&
-            [[m_ballIndexArray objectAtIndex:cellId+2] intValue] != -1) {
-            r1 = [self getBallTypeAtCell:cellId+1];
-            r2 = [self getBallTypeAtCell:cellId+2];
-            if (r1 == r2 && num == r1)
-                num = (num+1)%NUMBER_OF_BALL_TYPE;
-        }
-    }
-    return num;
-}
-
 - (int)getFreeBallIndex {
     for (int i=0; i<[m_ballArray count]; i++) {
         Ball *b = [m_ballArray objectAtIndex:i];
@@ -381,6 +355,45 @@
     return GLKVector2Make((cellId%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2, (cellId/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
 }
 
+- (void)setBallAtCell:(Ball*)ball atCell:(int)cellIndex {
+    ball.currentCell = cellIndex;
+    [m_ballIndexArray setObject:[NSNumber numberWithInt:[m_ballArray indexOfObject:ball]] atIndexedSubscript:cellIndex];
+}
+
+#pragma mark - gennerate ball for a cell
+- (int)generateBallTypeAtCell:(int)cellId {
+    int num= arc4random()%NUMBER_OF_BALL_TYPE;
+    int l1=-1, l2=-1, d1=-1, d2=-1, r1 = -1, r2 = -1;
+    
+    if (cellId/NUMBER_OF_BALL_IN_ROW > 1) {
+        d1 = [self getBallTypeAtCell:cellId-NUMBER_OF_BALL_IN_ROW];
+        d2 = [self getBallTypeAtCell:cellId-2*NUMBER_OF_BALL_IN_ROW];
+    }
+    if (cellId%NUMBER_OF_BALL_IN_ROW > 1) {
+        l1 = [self getBallTypeAtCell:cellId-1];
+        l2 = [self getBallTypeAtCell:cellId-2];
+    }
+    if (cellId%NUMBER_OF_BALL_IN_ROW < (NUMBER_OF_BALL_IN_ROW-2)) {
+        r1 = [self getBallTypeAtCell:cellId+1];
+        r2 = [self getBallTypeAtCell:cellId+2];
+    }
+    
+    NSMutableArray *except = [NSMutableArray array];
+    if(l1 == l2 && l1 != -1)
+        [except addObject:[NSNumber numberWithInt:l1]];
+    if(d1 == d2 && d1 != -1)
+        [except addObject:[NSNumber numberWithInt:d1]];
+    if(r1 == r2 && r1 != -1)
+        [except addObject:[NSNumber numberWithInt:r1]];
+    if(l1 == r1 && l1 != -1)
+        [except addObject:[NSNumber numberWithInt:l1]];
+    
+    while ([except containsObject:[NSNumber numberWithInt:num]]) {
+        num = (num+1)%NUMBER_OF_BALL_TYPE;
+    }
+    
+    return num;
+}
 
 #pragma mark - Ball moving
 
@@ -388,7 +401,6 @@
     if ((cellId+1) % NUMBER_OF_BALL_IN_ROW == 0)
         return;
     [self moveBall:cellId andDesCellId:cellId+1];
-    
     [m_smovingBall moveRight];
     [m_dmovingBall moveLeft];
 }
@@ -405,7 +417,6 @@
     if ((cellId/NUMBER_OF_BALL_IN_ROW) == NUMBER_OF_ROW -1)
         return;
     [self moveBall:cellId andDesCellId:cellId+NUMBER_OF_BALL_IN_ROW];
-    
     [m_smovingBall moveUp];
     [m_dmovingBall moveDown];
 }
@@ -419,23 +430,16 @@
 }
 
 - (void)moveBall:(int)cellId andDesCellId:(int)desCellId {
+    m_smovingBall = [self getBallAtCell:cellId];
+    m_dmovingBall = [self getBallAtCell:desCellId];
+    [self setBallAtCell:m_smovingBall atCell:desCellId];
+    [self setBallAtCell:m_dmovingBall atCell:cellId];
+    NSLog(@"move from [%d %d] --> [%d %d]",
+          cellId/NUMBER_OF_BALL_IN_ROW,
+          cellId%NUMBER_OF_BALL_IN_ROW,
+          desCellId/NUMBER_OF_BALL_IN_ROW,
+          desCellId%NUMBER_OF_BALL_IN_ROW);
     [self showTable];
-//    NSLog(@"Moving From: [%d, %d] To: [%d, %d]", cellId/NUMBER_OF_BALL_IN_ROW,
-//          cellId%NUMBER_OF_BALL_IN_ROW,
-//          desCellId/NUMBER_OF_BALL_IN_ROW,
-//          desCellId%NUMBER_OF_BALL_IN_ROW);
-    
-    int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
-    int dIndex = [[m_ballIndexArray objectAtIndex:desCellId] intValue];
-    
-    m_smovingBall = [m_ballArray objectAtIndex: cIndex];
-    m_dmovingBall = [m_ballArray objectAtIndex: dIndex];
-    
-    m_smovingBall.currentCell = desCellId;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:m_smovingBall.currentCell];
-    m_dmovingBall.currentCell = cellId;
-    [m_ballIndexArray setObject:[NSNumber numberWithInt:dIndex] atIndexedSubscript:m_dmovingBall.currentCell];
-    //[self showTable];
 }
 
 - (void)moveBallDown:(Ball*)ball {
@@ -449,15 +453,20 @@
         }
     }
     if (desCell != -1) {
-        [ball moveDownFromHere:[self getPosAtCell:desCell] andDuration:0.2];
         [m_ballIndexArray setObject:[NSNumber numberWithInt:-1]
                  atIndexedSubscript:ball.currentCell];
-        [ball setCurrentCell:desCell];
-        [m_ballIndexArray setObject:[NSNumber numberWithInteger:[m_ballArray indexOfObject:ball]]
-                 atIndexedSubscript:desCell];
+        [self setBallAtCell:ball atCell:desCell];
+        [ball moveDownFromHere:[self getPosAtCell:desCell] andDuration:BALL_DOWN_DURATION];
     }
 }
 
+- (void)stopAllBalls {
+    for (Ball *b in m_ballArray) {
+        [b stopMoving];
+    }
+}
+
+#pragma mark- debug
 - (void)showTable{
     for(int i=NUMBER_OF_ROW-1; i>=0; i--) {
         for(int j=0; j<NUMBER_OF_BALL_IN_ROW; j++) {

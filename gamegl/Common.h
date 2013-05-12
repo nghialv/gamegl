@@ -13,6 +13,7 @@
 #define NUMBER_OF_ROW 5
 
 #define TRANSLATE_DURATION 0.2
+#define BALL_DOWN_DURATION 0.2
 
 #define DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width
 #define DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height

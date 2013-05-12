@@ -17,7 +17,8 @@
 }
 
 - (void)render {
-    
+    [super render];
+    //render 
 }
 
 - (void)touchesBegan:(CGPoint)touchPoint {

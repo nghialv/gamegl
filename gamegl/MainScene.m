@@ -31,6 +31,8 @@
 }
 
 - (void)render {
+    [super render];
+    
     // draw balltable
     [m_ballTable render];
 }

@@ -14,6 +14,7 @@
 @property(strong) GLKBaseEffect *effect;
 
 - (id)initWithEffect:(GLKBaseEffect*)effect;
+- (void)setBackgroundFile:(NSString*)fileName;
 
 - (void)update:(float)dt;
 - (void)render;

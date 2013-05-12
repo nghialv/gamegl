@@ -1,0 +1,29 @@
+//
+//  CGScene.m
+//  gamegl
+//
+//  Created by iNghia on 5/12/13.
+//  Copyright (c) 2013 framgia. All rights reserved.
+//
+
+#import "CGScene.h"
+
+@implementation CGScene
+
+@synthesize effect = m_effect;
+
+- (id)initWithEffect:(GLKBaseEffect *)effect {
+    if (self = [super init]) {
+        m_effect = effect;
+    }
+    return self;
+}
+
+- (void)update:(float)dt{}
+- (void)render{}
+
+- (void)touchesBegan:(CGPoint)touchPoint{}
+- (void)touchesMoved:(CGPoint)touchPoint{}
+- (void)touchesEnded:(CGPoint)touchPoint{}
+
+@end

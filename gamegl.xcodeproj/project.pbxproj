@@ -31,6 +31,10 @@
 		DC52CBC4173AAC0A003376F2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC52CBC3173AAC0A003376F2 /* GameViewController.m */; };
 		DC52CBC8173AB3D7003376F2 /* blue-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBC6173AB3D7003376F2 /* blue-ball.png */; };
 		DC52CBC9173AB3D7003376F2 /* green-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBC7173AB3D7003376F2 /* green-ball.png */; };
+		DC9AF3B0173F676200C6B6DD /* CGScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AF3AF173F676200C6B6DD /* CGScene.m */; };
+		DC9AF3B6173F6F1A00C6B6DD /* WelcomeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AF3B5173F6F1A00C6B6DD /* WelcomeScene.m */; };
+		DC9AF3B9173F703F00C6B6DD /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AF3B8173F703F00C6B6DD /* MainScene.m */; };
+		DC9AF3BC173F746F00C6B6DD /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AF3BB173F746F00C6B6DD /* SceneManager.m */; };
 		DC9AFD39173F47850076F8F2 /* blue-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD34173F47840076F8F2 /* blue-pball.png */; };
 		DC9AFD3A173F47850076F8F2 /* red-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD35173F47840076F8F2 /* red-pball.png */; };
 		DC9AFD3B173F47850076F8F2 /* safari-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD36173F47840076F8F2 /* safari-pball.png */; };
@@ -85,6 +89,14 @@
 		DC52CBC6173AB3D7003376F2 /* blue-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue-ball.png"; path = "resource/blue-ball.png"; sourceTree = "<group>"; };
 		DC52CBC7173AB3D7003376F2 /* green-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "green-ball.png"; path = "resource/green-ball.png"; sourceTree = "<group>"; };
 		DC52CBCA173AB7F1003376F2 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		DC9AF3AE173F676200C6B6DD /* CGScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGScene.h; sourceTree = "<group>"; };
+		DC9AF3AF173F676200C6B6DD /* CGScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGScene.m; sourceTree = "<group>"; };
+		DC9AF3B4173F6F1A00C6B6DD /* WelcomeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeScene.h; sourceTree = "<group>"; };
+		DC9AF3B5173F6F1A00C6B6DD /* WelcomeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeScene.m; sourceTree = "<group>"; };
+		DC9AF3B7173F703F00C6B6DD /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		DC9AF3B8173F703F00C6B6DD /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
+		DC9AF3BA173F746F00C6B6DD /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		DC9AF3BB173F746F00C6B6DD /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
 		DC9AFD34173F47840076F8F2 /* blue-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue-pball.png"; path = "resource/blue-pball.png"; sourceTree = "<group>"; };
 		DC9AFD35173F47840076F8F2 /* red-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-pball.png"; path = "resource/red-pball.png"; sourceTree = "<group>"; };
 		DC9AFD36173F47840076F8F2 /* safari-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "safari-pball.png"; path = "resource/safari-pball.png"; sourceTree = "<group>"; };
@@ -224,6 +236,10 @@
 				DC52CBCA173AB7F1003376F2 /* Common.h */,
 				DC52CB8E173A8DAE003376F2 /* AppDelegate.h */,
 				DC52CB8F173A8DAE003376F2 /* AppDelegate.m */,
+				DC9AF3B4173F6F1A00C6B6DD /* WelcomeScene.h */,
+				DC9AF3B5173F6F1A00C6B6DD /* WelcomeScene.m */,
+				DC9AF3B7173F703F00C6B6DD /* MainScene.h */,
+				DC9AF3B8173F703F00C6B6DD /* MainScene.m */,
 				DC2A02F4173D641900C141E5 /* BallTable.h */,
 				DC2A02F5173D641900C141E5 /* BallTable.m */,
 				DCADA254173CF4D0009E0159 /* Ball.h */,
@@ -239,6 +255,10 @@
 				DC52CBC3173AAC0A003376F2 /* GameViewController.m */,
 				DC44ABC2173BFA1200ABA2A3 /* ResouceManager.h */,
 				DC44ABC3173BFA1200ABA2A3 /* ResouceManager.m */,
+				DC9AF3BA173F746F00C6B6DD /* SceneManager.h */,
+				DC9AF3BB173F746F00C6B6DD /* SceneManager.m */,
+				DC9AF3AE173F676200C6B6DD /* CGScene.h */,
+				DC9AF3AF173F676200C6B6DD /* CGScene.m */,
 				DC52CBB4173A8E0F003376F2 /* entities */,
 				DC52CBB5173A8E1B003376F2 /* model loader */,
 			);
@@ -389,6 +409,10 @@
 				DCADA253173CF384009E0159 /* Sprite.m in Sources */,
 				DCADA256173CF4D0009E0159 /* Ball.m in Sources */,
 				DC2A02F6173D641900C141E5 /* BallTable.m in Sources */,
+				DC9AF3B0173F676200C6B6DD /* CGScene.m in Sources */,
+				DC9AF3B6173F6F1A00C6B6DD /* WelcomeScene.m in Sources */,
+				DC9AF3B9173F703F00C6B6DD /* MainScene.m in Sources */,
+				DC9AF3BC173F746F00C6B6DD /* SceneManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

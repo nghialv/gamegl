@@ -9,12 +9,13 @@
 #import "GameViewController.h"
 #import "Common.h"
 #import "BallTable.h"
+#import "WelcomeScene.h"
 
 @interface GameViewController ()
 
 @property (nonatomic, strong) EAGLContext *context;
 @property (nonatomic, strong) GLKBaseEffect *effect;
-@property (nonatomic, retain) BallTable *ballTable;
+@property (nonatomic, retain) SceneManager *sceneManager;
 
 @end
 
@@ -23,7 +24,7 @@
 
 @synthesize context = m_context;
 @synthesize effect = m_effect;
-@synthesize ballTable = m_ballTable;
+@synthesize sceneManager = m_sceneManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,9 +57,10 @@
                                                       -1000.0,
                                                       1000.0);
     m_effect.transform.projectionMatrix = projectionMatrix;
-    // setting for balltable
-    m_ballTable = [BallTable sharedInstance];
-    [m_ballTable initilize:m_effect];
+    
+    m_sceneManager = [SceneManager sharedInstance];
+    [m_sceneManager addScene:@"welcomescene" andScene:[[WelcomeScene alloc] initWithEffect:m_effect]];
+    [m_sceneManager changeToScene:@"welcomescene"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,25 +70,29 @@
 }
 
 #pragma mark - GLKViewDelegate
+- (void)update {
+    [[m_sceneManager currentScene] update:self.timeSinceLastUpdate];
+}
+
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    // update
-    [m_ballTable update:self.timeSinceLastDraw];
     // clear color
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     // blend
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-    // draw balltable
-    [m_ballTable render];
+    
+    // draw current scene
+    [[m_sceneManager currentScene] render];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     UITouch *touch = [touches anyObject];
     CGPoint endPoint = [touch locationInView:self.view];
     endPoint.y = DEVICE_HEIGHT - endPoint.y;
     
-    [m_ballTable touchesEnded:endPoint];
+    [[m_sceneManager currentScene] touchesBegan:endPoint];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -95,16 +101,15 @@
     CGPoint endPoint = [touch locationInView:self.view];
     endPoint.y = DEVICE_HEIGHT - endPoint.y;
     
-    [m_ballTable touchesMoved:endPoint];
+    [[m_sceneManager currentScene] touchesMoved:endPoint];
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
-    CGPoint p = [touch locationInView:self.view];
-    p.y = DEVICE_HEIGHT - p.y;
+    CGPoint endPoint = [touch locationInView:self.view];
+    endPoint.y = DEVICE_HEIGHT - endPoint.y;
     
-    [m_ballTable touchesBegan:p];
+    [[m_sceneManager currentScene] touchesEnded:endPoint];
 }
 
 @end

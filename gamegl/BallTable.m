@@ -33,68 +33,62 @@
 @synthesize ballArray = m_ballArray;
 @synthesize movingBall = m_movingBall;
 
-+ (BallTable*)sharedInstance {
-    __strong static BallTable* sharedBallTable = nil;
-    static dispatch_once_t onceQueue=0;
-    
-    dispatch_once(&onceQueue, ^{
-        sharedBallTable = [[self alloc] init];
-    });
-    return sharedBallTable;
-}
 
-- (void)initilize:(GLKBaseEffect *)effect {
-    m_ballmoving = NO;
-    m_smovingBall = nil;
-    m_dmovingBall = nil;
+- (id)initWithEffect:(GLKBaseEffect*)effect {
+    if (self = [super init]) {
+        m_ballmoving = NO;
+        m_smovingBall = nil;
+        m_dmovingBall = nil;
     
-    m_ballIndexArray = [NSMutableArray array];
-    for (int i = 0; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
-        [m_ballIndexArray addObject:[NSNumber numberWithInt:-1]];
-    }
-    
-    float ballDiameter = BALL_DIAMETER;
-    
-    // setbackground
-    m_background = [[Texture2 alloc] initWithTexture:BALL_TABLE_BACKGROUND effect:effect];
-    [m_background setPos:GLKVector2Make(ballDiameter*NUMBER_OF_BALL_IN_ROW/2, ballDiameter*NUMBER_OF_ROW/2)];
-    [m_background setSize:CGSizeMake(ballDiameter*NUMBER_OF_BALL_IN_ROW, ballDiameter*NUMBER_OF_ROW)];
-    
-    m_ballArray = [NSMutableArray array];
-    
-    Ball *b;
-    NSString *ballColor;
-    int ballType;
-    
-    for (int i =0; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
-        switch ([self generateBallTypeAtCell:i]) {
-            case RED_BALL:
-                ballColor = RED_BALL_FILE_NAME;
-                ballType = RED_BALL;
-                break;
-            case GREEN_BALL:
-                ballColor = GREEN_BALL_FILE_NAME;
-                ballType = GREEN_BALL;
-                break;
-            case BLUE_BALL:
-                ballColor = BLUE_BALL_FILE_NAME;
-                ballType = BLUE_BALL;
-                break;
-            case ORANGE_BALL:
-            default:
-                ballColor = ORANGE_BALL_FILE_NAME;
-                ballType = ORANGE_BALL;
-                break;
+        m_ballIndexArray = [NSMutableArray array];
+        for (int i = 0; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
+            [m_ballIndexArray addObject:[NSNumber numberWithInt:-1]];
         }
-        b = [[Ball alloc] initWithTexture:ballColor effect:effect];
-        b.currentCell = i;
-        b.ballType = ballType;
-        b.size = CGSizeMake(ballDiameter, ballDiameter);
-        b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2,
+    
+        float ballDiameter = BALL_DIAMETER;
+    
+        // setbackground
+        m_background = [[Texture2 alloc] initWithTexture:BALL_TABLE_BACKGROUND effect:effect];
+        [m_background setPos:GLKVector2Make(ballDiameter*NUMBER_OF_BALL_IN_ROW/2, ballDiameter*NUMBER_OF_ROW/2)];
+        [m_background setSize:CGSizeMake(ballDiameter*NUMBER_OF_BALL_IN_ROW, ballDiameter*NUMBER_OF_ROW)];
+    
+        m_ballArray = [NSMutableArray array];
+    
+        Ball *b;
+        NSString *ballColor;
+        int ballType;
+    
+        for (int i =0; i < NUMBER_OF_BALL_IN_ROW*NUMBER_OF_ROW; i++) {
+            switch ([self generateBallTypeAtCell:i]) {
+                case RED_BALL:
+                    ballColor = RED_BALL_FILE_NAME;
+                    ballType = RED_BALL;
+                    break;
+                case GREEN_BALL:
+                    ballColor = GREEN_BALL_FILE_NAME;
+                    ballType = GREEN_BALL;
+                    break;
+                case BLUE_BALL:
+                    ballColor = BLUE_BALL_FILE_NAME;
+                    ballType = BLUE_BALL;
+                    break;
+                case ORANGE_BALL:
+                default:
+                    ballColor = ORANGE_BALL_FILE_NAME;
+                    ballType = ORANGE_BALL;
+                    break;
+            }
+            b = [[Ball alloc] initWithTexture:ballColor effect:effect];
+            b.currentCell = i;
+            b.ballType = ballType;
+            b.size = CGSizeMake(ballDiameter, ballDiameter);
+            b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2,
                                (i/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
-        [m_ballArray addObject:b];
-        [m_ballIndexArray setObject:[NSNumber numberWithInt:b.currentCell] atIndexedSubscript:i];
+            [m_ballArray addObject:b];
+            [m_ballIndexArray setObject:[NSNumber numberWithInt:b.currentCell] atIndexedSubscript:i];
+        }
     }
+    return self;
 }
 
 - (void)update:(float)dt {

@@ -7,6 +7,7 @@
 //
 
 #import <GLKit/GLKit.h>
+#import "SceneManager.h"
 
 @interface GameViewController : GLKViewController <UIGestureRecognizerDelegate>
 

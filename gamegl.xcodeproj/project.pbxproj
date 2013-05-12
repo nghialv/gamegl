@@ -236,14 +236,8 @@
 				DC52CBCA173AB7F1003376F2 /* Common.h */,
 				DC52CB8E173A8DAE003376F2 /* AppDelegate.h */,
 				DC52CB8F173A8DAE003376F2 /* AppDelegate.m */,
-				DC9AF3B4173F6F1A00C6B6DD /* WelcomeScene.h */,
-				DC9AF3B5173F6F1A00C6B6DD /* WelcomeScene.m */,
-				DC9AF3B7173F703F00C6B6DD /* MainScene.h */,
-				DC9AF3B8173F703F00C6B6DD /* MainScene.m */,
-				DC2A02F4173D641900C141E5 /* BallTable.h */,
-				DC2A02F5173D641900C141E5 /* BallTable.m */,
-				DCADA254173CF4D0009E0159 /* Ball.h */,
-				DCADA255173CF4D0009E0159 /* Ball.m */,
+				DC611A7B173F8A76003D9CFC /* scenes */,
+				DC611A7C173F8A93003D9CFC /* entities */,
 			);
 			name = "gamegl files";
 			sourceTree = "<group>";
@@ -280,6 +274,28 @@
 				DC52CBC7173AB3D7003376F2 /* green-ball.png */,
 			);
 			name = resource;
+			sourceTree = "<group>";
+		};
+		DC611A7B173F8A76003D9CFC /* scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DC9AF3B4173F6F1A00C6B6DD /* WelcomeScene.h */,
+				DC9AF3B5173F6F1A00C6B6DD /* WelcomeScene.m */,
+				DC9AF3B7173F703F00C6B6DD /* MainScene.h */,
+				DC9AF3B8173F703F00C6B6DD /* MainScene.m */,
+			);
+			name = scenes;
+			sourceTree = "<group>";
+		};
+		DC611A7C173F8A93003D9CFC /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				DC2A02F4173D641900C141E5 /* BallTable.h */,
+				DC2A02F5173D641900C141E5 /* BallTable.m */,
+				DCADA254173CF4D0009E0159 /* Ball.h */,
+				DCADA255173CF4D0009E0159 /* Ball.m */,
+			);
+			name = entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

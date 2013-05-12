@@ -14,6 +14,7 @@
     BOOL m_ballmoving;
     Ball* m_smovingBall;
     Ball* m_dmovingBall;
+    Texture2 *m_background;
 }
 
 @property (nonatomic, strong) NSMutableArray *ballIndexArray;
@@ -52,6 +53,13 @@
         [m_ballIndexArray addObject:[NSNumber numberWithInt:-1]];
     }
     
+    float ballDiameter = BALL_DIAMETER;
+    
+    // setbackground
+    m_background = [[Texture2 alloc] initWithTexture:BALL_TABLE_BACKGROUND effect:effect];
+    [m_background setPos:GLKVector2Make(ballDiameter*NUMBER_OF_BALL_IN_ROW/2, ballDiameter*NUMBER_OF_ROW/2)];
+    [m_background setSize:CGSizeMake(ballDiameter*NUMBER_OF_BALL_IN_ROW, ballDiameter*NUMBER_OF_ROW)];
+    
     m_ballArray = [NSMutableArray array];
     
     Ball *b;
@@ -81,9 +89,9 @@
         b = [[Ball alloc] initWithTexture:ballColor effect:effect];
         b.currentCell = i;
         b.ballType = ballType;
-        b.size = CGSizeMake(BALL_DIAMETER, BALL_DIAMETER);
-        b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*BALL_DIAMETER + BALL_DIAMETER/2,
-                               (i/NUMBER_OF_BALL_IN_ROW)*BALL_DIAMETER + BALL_DIAMETER/2);
+        b.size = CGSizeMake(ballDiameter, ballDiameter);
+        b.pos = GLKVector2Make((i%NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2,
+                               (i/NUMBER_OF_BALL_IN_ROW)*ballDiameter + ballDiameter/2);
         [m_ballArray addObject:b];
         [m_ballIndexArray setObject:[NSNumber numberWithInt:b.currentCell] atIndexedSubscript:i];
     }
@@ -98,13 +106,14 @@
 }
 
 - (void)render {
-    // draw entities
+    // render background
+    [m_background render];
+    // render entities
     for (Ball *e in m_ballArray) {
         if (e != m_smovingBall && e != m_dmovingBall)
             [e render];
     }
-    
-    // draw moving ball
+    // render moving ball
     if(m_movingBall)
         [m_movingBall render];
     if(m_smovingBall)

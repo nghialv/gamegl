@@ -22,6 +22,7 @@
 #define BLUE_BALL_FILE_NAME @"red-pball.png"
 #define GREEN_BALL_FILE_NAME @"yellow-pball.png"
 #define ORANGE_BALL_FILE_NAME @"safari-pball.png"
+#define BALL_TABLE_BACKGROUND @"balltable-background.png"
 
 enum BALL_TYPE{
     RED_BALL=0,

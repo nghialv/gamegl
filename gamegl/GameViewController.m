@@ -72,7 +72,7 @@
     // update
     [m_ballTable update:self.timeSinceLastDraw];
     // clear color
-    glClearColor(0.0, 0.5, 0.5, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     // blend
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

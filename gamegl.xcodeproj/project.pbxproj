@@ -30,6 +30,23 @@
 		DC52CBC4173AAC0A003376F2 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC52CBC3173AAC0A003376F2 /* GameViewController.m */; };
 		DC52CBC8173AB3D7003376F2 /* blue-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBC6173AB3D7003376F2 /* blue-ball.png */; };
 		DC52CBC9173AB3D7003376F2 /* green-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC52CBC7173AB3D7003376F2 /* green-ball.png */; };
+		DC9AFD20173EB4E50076F8F2 /* facebook-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD1C173EB4E50076F8F2 /* facebook-icon.png */; };
+		DC9AFD21173EB4E50076F8F2 /* gplus-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD1D173EB4E50076F8F2 /* gplus-icon.png */; };
+		DC9AFD22173EB4E50076F8F2 /* rss-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD1E173EB4E50076F8F2 /* rss-icon.png */; };
+		DC9AFD23173EB4E50076F8F2 /* twitter-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD1F173EB4E50076F8F2 /* twitter-icon.png */; };
+		DC9AFD28173EB6260076F8F2 /* facebook-icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD24173EB6260076F8F2 /* facebook-icon2.png */; };
+		DC9AFD29173EB6260076F8F2 /* gplus-icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD25173EB6260076F8F2 /* gplus-icon2.png */; };
+		DC9AFD2A173EB6260076F8F2 /* rss-icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD26173EB6260076F8F2 /* rss-icon2.png */; };
+		DC9AFD2B173EB6260076F8F2 /* twitter-icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD27173EB6260076F8F2 /* twitter-icon2.png */; };
+		DC9AFD30173EB7870076F8F2 /* facebook-icon64.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD2C173EB7870076F8F2 /* facebook-icon64.png */; };
+		DC9AFD31173EB7870076F8F2 /* gplus-icon64.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD2D173EB7870076F8F2 /* gplus-icon64.png */; };
+		DC9AFD32173EB7870076F8F2 /* rss-icon64.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD2E173EB7870076F8F2 /* rss-icon64.png */; };
+		DC9AFD33173EB7870076F8F2 /* twitter-icon64.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD2F173EB7870076F8F2 /* twitter-icon64.png */; };
+		DC9AFD39173F47850076F8F2 /* blue-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD34173F47840076F8F2 /* blue-pball.png */; };
+		DC9AFD3A173F47850076F8F2 /* red-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD35173F47840076F8F2 /* red-pball.png */; };
+		DC9AFD3B173F47850076F8F2 /* safari-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD36173F47840076F8F2 /* safari-pball.png */; };
+		DC9AFD3C173F47850076F8F2 /* white-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD37173F47840076F8F2 /* white-pball.png */; };
+		DC9AFD3D173F47850076F8F2 /* yellow-pball.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9AFD38173F47850076F8F2 /* yellow-pball.png */; };
 		DCADA250173CF308009E0159 /* Texture2.m in Sources */ = {isa = PBXBuildFile; fileRef = DCADA24F173CF308009E0159 /* Texture2.m */; };
 		DCADA253173CF384009E0159 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DCADA252173CF384009E0159 /* Sprite.m */; };
 		DCADA256173CF4D0009E0159 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = DCADA255173CF4D0009E0159 /* Ball.m */; };
@@ -78,6 +95,23 @@
 		DC52CBC6173AB3D7003376F2 /* blue-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue-ball.png"; path = "resource/blue-ball.png"; sourceTree = "<group>"; };
 		DC52CBC7173AB3D7003376F2 /* green-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "green-ball.png"; path = "resource/green-ball.png"; sourceTree = "<group>"; };
 		DC52CBCA173AB7F1003376F2 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		DC9AFD1C173EB4E50076F8F2 /* facebook-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon.png"; path = "resource/facebook-icon.png"; sourceTree = "<group>"; };
+		DC9AFD1D173EB4E50076F8F2 /* gplus-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gplus-icon.png"; path = "resource/gplus-icon.png"; sourceTree = "<group>"; };
+		DC9AFD1E173EB4E50076F8F2 /* rss-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rss-icon.png"; path = "resource/rss-icon.png"; sourceTree = "<group>"; };
+		DC9AFD1F173EB4E50076F8F2 /* twitter-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon.png"; path = "resource/twitter-icon.png"; sourceTree = "<group>"; };
+		DC9AFD24173EB6260076F8F2 /* facebook-icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon2.png"; path = "resource/facebook-icon2.png"; sourceTree = "<group>"; };
+		DC9AFD25173EB6260076F8F2 /* gplus-icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gplus-icon2.png"; path = "resource/gplus-icon2.png"; sourceTree = "<group>"; };
+		DC9AFD26173EB6260076F8F2 /* rss-icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rss-icon2.png"; path = "resource/rss-icon2.png"; sourceTree = "<group>"; };
+		DC9AFD27173EB6260076F8F2 /* twitter-icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon2.png"; path = "resource/twitter-icon2.png"; sourceTree = "<group>"; };
+		DC9AFD2C173EB7870076F8F2 /* facebook-icon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-icon64.png"; path = "resource/facebook-icon64.png"; sourceTree = "<group>"; };
+		DC9AFD2D173EB7870076F8F2 /* gplus-icon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gplus-icon64.png"; path = "resource/gplus-icon64.png"; sourceTree = "<group>"; };
+		DC9AFD2E173EB7870076F8F2 /* rss-icon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rss-icon64.png"; path = "resource/rss-icon64.png"; sourceTree = "<group>"; };
+		DC9AFD2F173EB7870076F8F2 /* twitter-icon64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter-icon64.png"; path = "resource/twitter-icon64.png"; sourceTree = "<group>"; };
+		DC9AFD34173F47840076F8F2 /* blue-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blue-pball.png"; path = "resource/blue-pball.png"; sourceTree = "<group>"; };
+		DC9AFD35173F47840076F8F2 /* red-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-pball.png"; path = "resource/red-pball.png"; sourceTree = "<group>"; };
+		DC9AFD36173F47840076F8F2 /* safari-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "safari-pball.png"; path = "resource/safari-pball.png"; sourceTree = "<group>"; };
+		DC9AFD37173F47840076F8F2 /* white-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "white-pball.png"; path = "resource/white-pball.png"; sourceTree = "<group>"; };
+		DC9AFD38173F47850076F8F2 /* yellow-pball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yellow-pball.png"; path = "resource/yellow-pball.png"; sourceTree = "<group>"; };
 		DCADA24E173CF308009E0159 /* Texture2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2.h; sourceTree = "<group>"; };
 		DCADA24F173CF308009E0159 /* Texture2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Texture2.m; sourceTree = "<group>"; };
 		DCADA251173CF384009E0159 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
@@ -236,6 +270,23 @@
 		DC52CBC5173AB3C0003376F2 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				DC9AFD34173F47840076F8F2 /* blue-pball.png */,
+				DC9AFD35173F47840076F8F2 /* red-pball.png */,
+				DC9AFD36173F47840076F8F2 /* safari-pball.png */,
+				DC9AFD37173F47840076F8F2 /* white-pball.png */,
+				DC9AFD38173F47850076F8F2 /* yellow-pball.png */,
+				DC9AFD2C173EB7870076F8F2 /* facebook-icon64.png */,
+				DC9AFD2D173EB7870076F8F2 /* gplus-icon64.png */,
+				DC9AFD2E173EB7870076F8F2 /* rss-icon64.png */,
+				DC9AFD2F173EB7870076F8F2 /* twitter-icon64.png */,
+				DC9AFD24173EB6260076F8F2 /* facebook-icon2.png */,
+				DC9AFD25173EB6260076F8F2 /* gplus-icon2.png */,
+				DC9AFD26173EB6260076F8F2 /* rss-icon2.png */,
+				DC9AFD27173EB6260076F8F2 /* twitter-icon2.png */,
+				DC9AFD1C173EB4E50076F8F2 /* facebook-icon.png */,
+				DC9AFD1D173EB4E50076F8F2 /* gplus-icon.png */,
+				DC9AFD1E173EB4E50076F8F2 /* rss-icon.png */,
+				DC9AFD1F173EB4E50076F8F2 /* twitter-icon.png */,
 				DC44ABBE173BF9D600ABA2A3 /* orange-ball.png */,
 				DC44ABBF173BF9D600ABA2A3 /* red-ball.png */,
 				DC52CBC6173AB3D7003376F2 /* blue-ball.png */,
@@ -323,6 +374,23 @@
 				DC52CBC9173AB3D7003376F2 /* green-ball.png in Resources */,
 				DC44ABC0173BF9D600ABA2A3 /* orange-ball.png in Resources */,
 				DC44ABC1173BF9D600ABA2A3 /* red-ball.png in Resources */,
+				DC9AFD20173EB4E50076F8F2 /* facebook-icon.png in Resources */,
+				DC9AFD21173EB4E50076F8F2 /* gplus-icon.png in Resources */,
+				DC9AFD22173EB4E50076F8F2 /* rss-icon.png in Resources */,
+				DC9AFD23173EB4E50076F8F2 /* twitter-icon.png in Resources */,
+				DC9AFD28173EB6260076F8F2 /* facebook-icon2.png in Resources */,
+				DC9AFD29173EB6260076F8F2 /* gplus-icon2.png in Resources */,
+				DC9AFD2A173EB6260076F8F2 /* rss-icon2.png in Resources */,
+				DC9AFD2B173EB6260076F8F2 /* twitter-icon2.png in Resources */,
+				DC9AFD30173EB7870076F8F2 /* facebook-icon64.png in Resources */,
+				DC9AFD31173EB7870076F8F2 /* gplus-icon64.png in Resources */,
+				DC9AFD32173EB7870076F8F2 /* rss-icon64.png in Resources */,
+				DC9AFD33173EB7870076F8F2 /* twitter-icon64.png in Resources */,
+				DC9AFD39173F47850076F8F2 /* blue-pball.png in Resources */,
+				DC9AFD3A173F47850076F8F2 /* red-pball.png in Resources */,
+				DC9AFD3B173F47850076F8F2 /* safari-pball.png in Resources */,
+				DC9AFD3C173F47850076F8F2 /* white-pball.png in Resources */,
+				DC9AFD3D173F47850076F8F2 /* yellow-pball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

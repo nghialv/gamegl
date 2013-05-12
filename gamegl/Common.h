@@ -18,10 +18,10 @@
 #define DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BALL_DIAMETER DEVICE_WIDTH/NUMBER_OF_BALL_IN_ROW
 
-#define RED_BALL_FILE_NAME @"red-ball.png"
-#define BLUE_BALL_FILE_NAME @"blue-ball.png"
-#define GREEN_BALL_FILE_NAME @"green-ball.png"
-#define ORANGE_BALL_FILE_NAME @"orange-ball.png"
+#define RED_BALL_FILE_NAME @"blue-pball.png"
+#define BLUE_BALL_FILE_NAME @"red-pball.png"
+#define GREEN_BALL_FILE_NAME @"yellow-pball.png"
+#define ORANGE_BALL_FILE_NAME @"safari-pball.png"
 
 enum BALL_TYPE{
     RED_BALL=0,

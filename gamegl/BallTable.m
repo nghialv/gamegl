@@ -100,7 +100,8 @@
 - (void)render {
     // draw entities
     for (Ball *e in m_ballArray) {
-        [e render];
+        if (e != m_smovingBall && e != m_dmovingBall)
+            [e render];
     }
     
     // draw moving ball
@@ -231,9 +232,9 @@
         }
         // add effect
     }
-    NSLog(@"After check");
-    [self showTable];
-    NSLog(@"After resort");
+    //NSLog(@"After check");
+    //[self showTable];
+    //NSLog(@"After resort");
     
     // resort table
     if (sumPoint > 0)
@@ -250,7 +251,7 @@
                 [self moveBallDown:curBall];
         }
     }
-    [self showTable];
+    //[self showTable];
 }
 
 - (void)showTable{
@@ -299,6 +300,8 @@
             }
         }
     }
+    NSLog(@"Added new ball");
+    [self showTable];
 }
 
 - (int)getFreeBallIndex {
@@ -318,13 +321,11 @@
 #pragma mark - event
 
 - (void)touchesBegan:(CGPoint)touchPoint {
-    NSLog(@"TouchPoint: %f %f", touchPoint.x, touchPoint.y);
     float ballDiameter = BALL_DIAMETER;
     int i = touchPoint.x/ballDiameter;
     int j = touchPoint.y/ballDiameter;
     
     if (j < NUMBER_OF_ROW) {
-        NSLog(@"moving ball: %d", j*NUMBER_OF_BALL_IN_ROW + i);
         m_ballmoving = YES;
         m_movingBall = [self getBallAtCell:(j*NUMBER_OF_BALL_IN_ROW + i)];
     }
@@ -410,10 +411,10 @@
 
 - (void)moveBall:(int)cellId andDesCellId:(int)desCellId {
     [self showTable];
-    NSLog(@"Moving From: [%d, %d] To: [%d, %d]", cellId/NUMBER_OF_BALL_IN_ROW,
-          cellId%NUMBER_OF_BALL_IN_ROW,
-          desCellId/NUMBER_OF_BALL_IN_ROW,
-          desCellId%NUMBER_OF_BALL_IN_ROW);
+//    NSLog(@"Moving From: [%d, %d] To: [%d, %d]", cellId/NUMBER_OF_BALL_IN_ROW,
+//          cellId%NUMBER_OF_BALL_IN_ROW,
+//          desCellId/NUMBER_OF_BALL_IN_ROW,
+//          desCellId%NUMBER_OF_BALL_IN_ROW);
     
     int cIndex = [[m_ballIndexArray objectAtIndex:cellId] intValue];
     int dIndex = [[m_ballIndexArray objectAtIndex:desCellId] intValue];
@@ -425,7 +426,7 @@
     [m_ballIndexArray setObject:[NSNumber numberWithInt:cIndex] atIndexedSubscript:m_smovingBall.currentCell];
     m_dmovingBall.currentCell = cellId;
     [m_ballIndexArray setObject:[NSNumber numberWithInt:dIndex] atIndexedSubscript:m_dmovingBall.currentCell];
-    [self showTable];
+    //[self showTable];
 }
 
 - (void)moveBallDown:(Ball*)ball {
